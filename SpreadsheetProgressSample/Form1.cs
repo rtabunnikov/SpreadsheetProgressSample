@@ -74,5 +74,12 @@ namespace SpreadsheetProgressSample {
                 End();
             }
         }
+
+        private void Form1_FormClosing(object sender, FormClosingEventArgs e) {
+            if (cancellationTokenSource != null) {
+                MessageBox.Show("Operation in progress!", Text, MessageBoxButtons.OK, MessageBoxIcon.Hand);
+                e.Cancel = true;
+            }
+        }
     }
 }
