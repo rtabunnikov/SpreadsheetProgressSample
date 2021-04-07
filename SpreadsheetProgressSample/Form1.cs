@@ -20,7 +20,7 @@ namespace SpreadsheetProgressSample {
             spreadsheetControl1.ReplaceService<IProgressIndicationService>(this);
         }
 
-        public void Begin(string displayName, int minProgress, int maxProgress, int currentProgress) {
+        void IProgressIndicationService.Begin(string displayName, int minProgress, int maxProgress, int currentProgress) {
             cancellationTokenSource = new CancellationTokenSource();
             savedCancellationTokenProvider = spreadsheetControl1.ReplaceService<ICancellationTokenProvider>(new CancellationTokenProvider(cancellationTokenSource.Token));
             repositoryItemProgressBar1.Minimum = minProgress;
@@ -30,7 +30,7 @@ namespace SpreadsheetProgressSample {
             butCancel.Enabled = true;
         }
 
-        public void End() {
+        void IProgressIndicationService.End() {
             spreadsheetControl1.ReplaceService(savedCancellationTokenProvider);
             cancellationTokenSource?.Dispose();
             cancellationTokenSource = null;
@@ -39,23 +39,23 @@ namespace SpreadsheetProgressSample {
             butCancel.Enabled = false;
         }
 
-        public void SetProgress(int currentProgress) {
+        void IProgressIndicationService.SetProgress(int currentProgress) {
             barProgress.EditValue = currentProgress;
             Application.DoEvents();
         }
 
-        private void butCancel_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e) {
+        void butCancel_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e) {
             cancellationTokenSource?.Cancel();
         }
 
-        private void spreadsheetControl1_UnhandledException(object sender, DevExpress.XtraSpreadsheet.SpreadsheetUnhandledExceptionEventArgs e) {
+        void spreadsheetControl1_UnhandledException(object sender, DevExpress.XtraSpreadsheet.SpreadsheetUnhandledExceptionEventArgs e) {
             if (e.Exception is OperationCanceledException) {
                 e.Handled = true;
-                End();
+                ((IProgressIndicationService)this).End();
             }
         }
 
-        private void Form1_FormClosing(object sender, FormClosingEventArgs e) {
+        void Form1_FormClosing(object sender, FormClosingEventArgs e) {
             if (cancellationTokenSource != null) {
                 MessageBox.Show("Operation in progress!", Text, MessageBoxButtons.OK, MessageBoxIcon.Hand);
                 e.Cancel = true;
