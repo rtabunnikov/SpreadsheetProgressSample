@@ -39,10 +39,6 @@ namespace SpreadsheetProgressSample {
             splashScreenManager1.SetWaitFormDescription($"{currentProgress}%");
         }
 
-        void butCancel_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e) {
-            cancellationTokenSource?.Cancel();
-        }
-
         void spreadsheetControl1_UnhandledException(object sender, DevExpress.XtraSpreadsheet.SpreadsheetUnhandledExceptionEventArgs e) {
             if (e.Exception is OperationCanceledException)
                 e.Handled = true;
