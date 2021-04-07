@@ -29,10 +29,11 @@ namespace SpreadsheetProgressSample {
         }
 
         void IProgressIndicationService.End() {
+            splashScreenManager1.CloseWaitForm();
             spreadsheetControl1.ReplaceService(savedCancellationTokenProvider);
+            spreadsheetControl1.UpdateCommandUI();
             cancellationTokenSource?.Dispose();
             cancellationTokenSource = null;
-            splashScreenManager1.CloseWaitForm();
         }
 
         void IProgressIndicationService.SetProgress(int currentProgress) {
