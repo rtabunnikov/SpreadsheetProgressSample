@@ -18,7 +18,6 @@ namespace SpreadsheetProgressSample {
         public Form1() {
             InitializeComponent();
             spreadsheetControl1.ReplaceService<IProgressIndicationService>(this);
-            //spreadsheetControl1.Options.Compatibility.EnableLegacyPdfExport = true;
         }
 
         public void Begin(string displayName, int minProgress, int maxProgress, int currentProgress) {
@@ -43,25 +42,6 @@ namespace SpreadsheetProgressSample {
         public void SetProgress(int currentProgress) {
             barProgress.EditValue = currentProgress;
             Application.DoEvents();
-        }
-
-        private void btnExportToHtml_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e) {
-            try {
-                spreadsheetControl1.Document.ExportToHtml("c:\\test\\_test.html",
-                    new HtmlDocumentExporterOptions() { SheetIndex = 0, EmbedImages = true, ExportImages = true });
-            }
-            catch (OperationCanceledException) {
-                End();
-            }
-        }
-
-        private void btnExportToPDF_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e) {
-            try {
-                spreadsheetControl1.Document.ExportToPdf("c:\\test\\_test.pdf");
-            }
-            catch (OperationCanceledException) {
-                End();
-            }
         }
 
         private void butCancel_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e) {
