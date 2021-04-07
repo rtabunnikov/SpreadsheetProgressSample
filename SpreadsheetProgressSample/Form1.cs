@@ -8,7 +8,6 @@ using System.Threading;
 using DevExpress.Office.Services;
 using DevExpress.Office.Services.Implementation;
 using DevExpress.Services;
-using DevExpress.XtraSpreadsheet.Export;
 
 namespace SpreadsheetProgressSample {
     public partial class Form1 : Form, IProgressIndicationService {
@@ -23,25 +22,21 @@ namespace SpreadsheetProgressSample {
         void IProgressIndicationService.Begin(string displayName, int minProgress, int maxProgress, int currentProgress) {
             cancellationTokenSource = new CancellationTokenSource();
             savedCancellationTokenProvider = spreadsheetControl1.ReplaceService<ICancellationTokenProvider>(new CancellationTokenProvider(cancellationTokenSource.Token));
-            repositoryItemProgressBar1.Minimum = minProgress;
-            repositoryItemProgressBar1.Maximum = maxProgress;
-            barProgress.Caption = displayName;
-            barProgress.EditValue = currentProgress;
-            butCancel.Enabled = true;
+            splashScreenManager1.ShowWaitForm();
+            splashScreenManager1.SetWaitFormCaption(displayName);
+            splashScreenManager1.SetWaitFormDescription($"{currentProgress}%");
+            splashScreenManager1.SendCommand(WaitForm1.WaitFormCommand.SetCancellationTokenSource, cancellationTokenSource);
         }
 
         void IProgressIndicationService.End() {
             spreadsheetControl1.ReplaceService(savedCancellationTokenProvider);
             cancellationTokenSource?.Dispose();
             cancellationTokenSource = null;
-            barProgress.Caption = "";
-            barProgress.EditValue = 0;
-            butCancel.Enabled = false;
+            splashScreenManager1.CloseWaitForm();
         }
 
         void IProgressIndicationService.SetProgress(int currentProgress) {
-            barProgress.EditValue = currentProgress;
-            Application.DoEvents();
+            splashScreenManager1.SetWaitFormDescription($"{currentProgress}%");
         }
 
         void butCancel_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e) {
@@ -49,17 +44,8 @@ namespace SpreadsheetProgressSample {
         }
 
         void spreadsheetControl1_UnhandledException(object sender, DevExpress.XtraSpreadsheet.SpreadsheetUnhandledExceptionEventArgs e) {
-            if (e.Exception is OperationCanceledException) {
+            if (e.Exception is OperationCanceledException)
                 e.Handled = true;
-                ((IProgressIndicationService)this).End();
-            }
-        }
-
-        void Form1_FormClosing(object sender, FormClosingEventArgs e) {
-            if (cancellationTokenSource != null) {
-                MessageBox.Show("Operation in progress!", Text, MessageBoxButtons.OK, MessageBoxIcon.Hand);
-                e.Cancel = true;
-            }
         }
     }
 }

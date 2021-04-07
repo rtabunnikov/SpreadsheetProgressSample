@@ -268,8 +268,8 @@ namespace SpreadsheetProgressSample {
             DevExpress.Utils.ToolTipItem toolTipItem7 = new DevExpress.Utils.ToolTipItem();
             DevExpress.Utils.SuperToolTip superToolTip8 = new DevExpress.Utils.SuperToolTip();
             DevExpress.Utils.ToolTipItem toolTipItem8 = new DevExpress.Utils.ToolTipItem();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             DevExpress.XtraBars.Ribbon.ReduceOperation reduceOperation1 = new DevExpress.XtraBars.Ribbon.ReduceOperation();
+            this.splashScreenManager1 = new DevExpress.XtraSplashScreen.SplashScreenManager(this, typeof(global::SpreadsheetProgressSample.WaitForm1), false, false);
             this.spreadsheetControl1 = new DevExpress.XtraSpreadsheet.SpreadsheetControl();
             this.ribbonControl1 = new DevExpress.XtraBars.Ribbon.RibbonControl();
             this.spreadsheetCommandBarButtonItem1 = new DevExpress.XtraSpreadsheet.UI.SpreadsheetCommandBarButtonItem();
@@ -650,9 +650,6 @@ namespace SpreadsheetProgressSample {
             this.zoomEditItem1 = new DevExpress.XtraSpreadsheet.UI.ZoomEditItem();
             this.repositoryItemZoomTrackBar1 = new DevExpress.XtraEditors.Repository.RepositoryItemZoomTrackBar();
             this.showZoomButtonItem1 = new DevExpress.XtraSpreadsheet.UI.ShowZoomButtonItem();
-            this.barProgress = new DevExpress.XtraBars.BarEditItem();
-            this.repositoryItemProgressBar1 = new DevExpress.XtraEditors.Repository.RepositoryItemProgressBar();
-            this.butCancel = new DevExpress.XtraBars.BarButtonItem();
             this.chartToolsRibbonPageCategory1 = new DevExpress.XtraSpreadsheet.UI.ChartToolsRibbonPageCategory();
             this.chartsDesignRibbonPage1 = new DevExpress.XtraSpreadsheet.UI.ChartsDesignRibbonPage();
             this.chartsDesignTypeRibbonPageGroup1 = new DevExpress.XtraSpreadsheet.UI.ChartsDesignTypeRibbonPageGroup();
@@ -729,6 +726,7 @@ namespace SpreadsheetProgressSample {
             this.showRibbonPageGroup1 = new DevExpress.XtraSpreadsheet.UI.ShowRibbonPageGroup();
             this.zoomRibbonPageGroup1 = new DevExpress.XtraSpreadsheet.UI.ZoomRibbonPageGroup();
             this.windowRibbonPageGroup1 = new DevExpress.XtraSpreadsheet.UI.WindowRibbonPageGroup();
+            this.repositoryItemProgressBar1 = new DevExpress.XtraEditors.Repository.RepositoryItemProgressBar();
             this.ribbonStatusBar1 = new DevExpress.XtraBars.Ribbon.RibbonStatusBar();
             this.spreadsheetFormulaBar1 = new DevExpress.XtraSpreadsheet.SpreadsheetFormulaBar();
             this.splitterControl1 = new DevExpress.XtraEditors.SplitterControl();
@@ -766,6 +764,10 @@ namespace SpreadsheetProgressSample {
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemProgressBar1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.spreadsheetBarController1)).BeginInit();
             this.SuspendLayout();
+            // 
+            // splashScreenManager1
+            // 
+            this.splashScreenManager1.ClosingDelay = 500;
             // 
             // spreadsheetControl1
             // 
@@ -1134,9 +1136,7 @@ namespace SpreadsheetProgressSample {
             this.maxInfoStaticItem1,
             this.sumInfoStaticItem1,
             this.zoomEditItem1,
-            this.showZoomButtonItem1,
-            this.barProgress,
-            this.butCancel});
+            this.showZoomButtonItem1});
             this.ribbonControl1.Location = new System.Drawing.Point(0, 0);
             this.ribbonControl1.Margin = new System.Windows.Forms.Padding(2);
             this.ribbonControl1.MaxItemId = 355;
@@ -4609,27 +4609,6 @@ namespace SpreadsheetProgressSample {
             superToolTip8.Items.Add(toolTipItem8);
             this.showZoomButtonItem1.SuperTip = superToolTip8;
             // 
-            // barProgress
-            // 
-            this.barProgress.Edit = this.repositoryItemProgressBar1;
-            this.barProgress.EditValue = "0";
-            this.barProgress.EditWidth = 200;
-            this.barProgress.Id = 350;
-            this.barProgress.Name = "barProgress";
-            // 
-            // repositoryItemProgressBar1
-            // 
-            this.repositoryItemProgressBar1.Name = "repositoryItemProgressBar1";
-            // 
-            // butCancel
-            // 
-            this.butCancel.Enabled = false;
-            this.butCancel.Id = 354;
-            this.butCancel.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("butCancel.ImageOptions.Image")));
-            this.butCancel.ImageOptions.LargeImage = ((System.Drawing.Image)(resources.GetObject("butCancel.ImageOptions.LargeImage")));
-            this.butCancel.Name = "butCancel";
-            this.butCancel.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.butCancel_ItemClick);
-            // 
             // chartToolsRibbonPageCategory1
             // 
             this.chartToolsRibbonPageCategory1.Control = this.spreadsheetControl1;
@@ -5258,6 +5237,10 @@ namespace SpreadsheetProgressSample {
             this.windowRibbonPageGroup1.ItemLinks.Add(this.spreadsheetCommandBarSubItem28);
             this.windowRibbonPageGroup1.Name = "windowRibbonPageGroup1";
             // 
+            // repositoryItemProgressBar1
+            // 
+            this.repositoryItemProgressBar1.Name = "repositoryItemProgressBar1";
+            // 
             // ribbonStatusBar1
             // 
             this.ribbonStatusBar1.ItemLinks.Add(this.endModeInfoStaticItem1);
@@ -5269,8 +5252,6 @@ namespace SpreadsheetProgressSample {
             this.ribbonStatusBar1.ItemLinks.Add(this.sumInfoStaticItem1);
             this.ribbonStatusBar1.ItemLinks.Add(this.zoomEditItem1);
             this.ribbonStatusBar1.ItemLinks.Add(this.showZoomButtonItem1);
-            this.ribbonStatusBar1.ItemLinks.Add(this.barProgress);
-            this.ribbonStatusBar1.ItemLinks.Add(this.butCancel);
             this.ribbonStatusBar1.Location = new System.Drawing.Point(0, 412);
             this.ribbonStatusBar1.Margin = new System.Windows.Forms.Padding(2);
             this.ribbonStatusBar1.Name = "ribbonStatusBar1";
@@ -5656,7 +5637,6 @@ namespace SpreadsheetProgressSample {
             this.Name = "Form1";
             this.Text = "Spreadsheet Progress Sample";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
-            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Form1_FormClosing);
             ((System.ComponentModel.ISupportInitialize)(this.ribbonControl1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemFontEdit1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemSpreadsheetFontSizeEdit1)).EndInit();
@@ -6156,9 +6136,8 @@ namespace SpreadsheetProgressSample {
         private DevExpress.XtraSpreadsheet.UI.WindowRibbonPageGroup windowRibbonPageGroup1;
         private DevExpress.XtraBars.Ribbon.RibbonStatusBar ribbonStatusBar1;
         private DevExpress.XtraSpreadsheet.UI.SpreadsheetBarController spreadsheetBarController1;
-        private DevExpress.XtraBars.BarEditItem barProgress;
         private DevExpress.XtraEditors.Repository.RepositoryItemProgressBar repositoryItemProgressBar1;
-        private DevExpress.XtraBars.BarButtonItem butCancel;
+        private DevExpress.XtraSplashScreen.SplashScreenManager splashScreenManager1;
     }
 }
 
