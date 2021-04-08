@@ -26,7 +26,6 @@ namespace SpreadsheetProgressSample {
             splashScreenManager1.SetWaitFormCaption(displayName);
             splashScreenManager1.SetWaitFormDescription($"{currentProgress}%");
             splashScreenManager1.SendCommand(WaitForm1.WaitFormCommand.SetCancellationTokenSource, cancellationTokenSource);
-            Application.DoEvents();
         }
 
         void IProgressIndicationService.End() {
