@@ -21,7 +21,7 @@ namespace SpreadsheetProgressSample {
 
         void IProgressIndicationService.Begin(string displayName, int minProgress, int maxProgress, int currentProgress) {
             cancellationTokenSource = new CancellationTokenSource();
-            savedCancellationTokenProvider = spreadsheetControl1.ReplaceService(new CancellationTokenProvider(cancellationTokenSource.Token));
+            savedCancellationTokenProvider = spreadsheetControl1.ReplaceService<ICancellationTokenProvider>(new CancellationTokenProvider(cancellationTokenSource.Token));
             repositoryItemProgressBar1.Minimum = minProgress;
             repositoryItemProgressBar1.Maximum = maxProgress;
             barProgress.Caption = displayName;
