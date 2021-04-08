@@ -1,11 +1,5 @@
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Text;
 using System.Threading;
-using System.Windows.Forms;
 using DevExpress.XtraWaitForm;
 
 namespace SpreadsheetProgressSample {
@@ -14,19 +8,19 @@ namespace SpreadsheetProgressSample {
 
         public WaitForm1() {
             InitializeComponent();
-            this.progressPanel1.AutoSize = true;
+            progressPanel1.AutoSize = true;
         }
-
-        #region Overrides
 
         public override void SetCaption(string caption) {
             base.SetCaption(caption);
-            this.progressPanel1.Caption = caption;
+            progressPanel1.Caption = caption;
         }
+
         public override void SetDescription(string description) {
             base.SetDescription(description);
-            this.progressPanel1.Description = description;
+            progressPanel1.Description = description;
         }
+
         public override void ProcessCommand(Enum cmd, object arg) {
             base.ProcessCommand(cmd, arg);
             WaitFormCommand command = (WaitFormCommand)cmd;
@@ -34,13 +28,11 @@ namespace SpreadsheetProgressSample {
                 cancellationTokenSource = (CancellationTokenSource)arg;
         }
 
-        #endregion
-
         public enum WaitFormCommand {
             SetCancellationTokenSource
         }
 
-        private void lblCancel_Click(object sender, EventArgs e) {
+        void lblCancel_Click(object sender, EventArgs e) {
             cancellationTokenSource?.Cancel();
         }
     }
