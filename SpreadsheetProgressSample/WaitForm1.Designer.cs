@@ -73,7 +73,7 @@ namespace SpreadsheetProgressSample {
             this.hyperlinkLabelControl1.Size = new System.Drawing.Size(32, 13);
             this.hyperlinkLabelControl1.TabIndex = 1;
             this.hyperlinkLabelControl1.Text = "Cancel";
-            this.hyperlinkLabelControl1.Click += new System.EventHandler(this.lblCancel_Click);
+            this.hyperlinkLabelControl1.Click += new System.EventHandler(this.Cancel_Click);
             // 
             // WaitForm1
             // 

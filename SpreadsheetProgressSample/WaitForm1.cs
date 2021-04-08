@@ -32,7 +32,7 @@ namespace SpreadsheetProgressSample {
             SetCancellationTokenSource
         }
 
-        void lblCancel_Click(object sender, EventArgs e) {
+        void Cancel_Click(object sender, EventArgs e) {
             cancellationTokenSource?.Cancel();
         }
     }
