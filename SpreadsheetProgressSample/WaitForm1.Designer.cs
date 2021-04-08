@@ -37,7 +37,6 @@ namespace SpreadsheetProgressSample {
             this.progressPanel1.AppearanceCaption.Options.UseFont = true;
             this.progressPanel1.AppearanceDescription.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
             this.progressPanel1.AppearanceDescription.Options.UseFont = true;
-            this.progressPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.progressPanel1.ImageHorzOffset = 10;
             this.progressPanel1.Location = new System.Drawing.Point(0, 17);
             this.progressPanel1.Margin = new System.Windows.Forms.Padding(0, 3, 0, 3);
