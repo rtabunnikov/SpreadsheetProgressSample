@@ -25,7 +25,8 @@ namespace SpreadsheetProgressSample {
         }
 
         void IProgressIndicationService.End() {
-            splashScreenManager1.CloseWaitForm();
+            if (splashScreenManager1.IsSplashFormVisible)
+                splashScreenManager1.CloseWaitForm();
             spreadsheetControl1.ReplaceService(savedCancellationTokenProvider);
             spreadsheetControl1.UpdateCommandUI();
             cancellationTokenSource?.Dispose();
